@@ -15,8 +15,18 @@ class Email {
     private $senderEmailAddress;
     private $senderName;
     private $deliveryTime;
+    private $isHTML;
 
-    public function __construct($subject, $body, $senderEmailAddress = null, $senderName = null, $replyToEmailAddress = null)
+    /**
+     * Email constructor.
+     * @param $subject string
+     * @param $body string
+     * @param null $senderEmailAddress string
+     * @param null $senderName string
+     * @param null $replyToEmailAddress string
+     * @param bool $isHTML bool
+     */
+    public function __construct($subject, $body, $senderEmailAddress = null, $senderName = null, $replyToEmailAddress = null, $isHTML = true)
     {
         $this->subject = $subject;
         $this->body = $body;
@@ -24,20 +34,30 @@ class Email {
         $this->senderEmailAddress = $senderEmailAddress;
         $this->senderName = $senderName;
         $this->replyToEmailAddress = $replyToEmailAddress;
+        $this->isHTML = $isHTML;
 
         $this->recipients = [];
         $this->ccRecipients = [];
         $this->bccRecipients = [];
     }
 
+    /**
+     * @param $recipients Recipient[]
+     */
     public function addRecipients($recipients) {
         $this->recipients = array_merge($this->recipients, $recipients);
     }
 
+    /**
+     * @param $recipients Recipient[]
+     */
     public function addCCRecipients($recipients) {
         $this->ccRecipients = array_merge($this->ccRecipients, $recipients);
     }
 
+    /**
+     * @param $recipients Recipient[]
+     */
     public function addBCCRecipients($recipients) {
         $this->bccRecipients = array_merge($this->bccRecipients, $recipients);
     }
@@ -86,5 +106,9 @@ class Email {
 
     public function getDeliveryTime() {
         return $this->deliveryTime;
+    }
+
+    public function isHTML() {
+        return $this->isHTML;
     }
 }

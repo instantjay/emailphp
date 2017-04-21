@@ -26,11 +26,18 @@ class Mailgun extends Provider {
         $s = [
             'from' => "$this->defaultSenderName <$this->defaultSenderEmailAddress>",
             'subject' => $email->getSubject(),
-            'text' => $email->getBody(),
             'to' => $this->buildRecipientList($email->getRecipients()),
             'cc' => $this->buildRecipientList($email->getCCRecipients()),
             'bcc' => $this->buildRecipientList($email->getBCCRecipients())
         ];
+
+        if($email->isHTML()) {
+            $s['text'] = 'Your e-mail client does not support HTML.';
+            $s['html'] = $email->getBody();
+        }
+        else {
+            $s['text'] = $email->getBody();
+        }
 
         if($email->getDeliveryTime()) {
             $s['o:deliverytime'] = $email->getDeliveryTime();
