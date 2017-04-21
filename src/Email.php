@@ -21,8 +21,8 @@ class Email {
      * Email constructor.
      * @param $subject string
      * @param $body string
-     * @param null $senderEmailAddress string
-     * @param null $senderName string
+     * @param null $senderEmailAddress string If sending null will automatically revert to default set when instantiating the Provider object.
+     * @param null $senderName string If sending null will automatically revert to default set when instantiating the Provider object.
      * @param null $replyToEmailAddress string
      * @param bool $isHTML bool
      */
@@ -70,14 +70,23 @@ class Email {
         return $this->body;
     }
 
+    /**
+     * @return Recipient[]
+     */
     public function getRecipients() {
         return $this->recipients;
     }
 
+    /**
+     * @return Recipient[]
+     */
     public function getCCRecipients() {
         return $this->ccRecipients;
     }
 
+    /**
+     * @return Recipient[]
+     */
     public function getBCCRecipients() {
         return $this->bccRecipients;
     }

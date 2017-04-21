@@ -13,11 +13,10 @@ class Mailgun extends Provider {
 
     public function __construct($apikey, $domain, $defaultSenderEmailAddress, $defaultSenderName)
     {
+        parent::__construct($defaultSenderEmailAddress, $defaultSenderName);
+
         $this->apiKey = $apikey;
         $this->domain = $domain;
-
-        $this->defaultSenderEmailAddress = $defaultSenderEmailAddress;
-        $this->defaultSenderName = $defaultSenderName;
     }
 
     public function send($email) {
@@ -30,6 +29,10 @@ class Mailgun extends Provider {
             'cc' => $this->buildRecipientList($email->getCCRecipients()),
             'bcc' => $this->buildRecipientList($email->getBCCRecipients())
         ];
+
+        if($email->getReplyToEmailAddress()) {
+            $s['h:Reply-To'] = $email->getReplyToEmailAddress();
+        }
 
         if($email->isHTML()) {
             $s['text'] = 'Your e-mail client does not support HTML.';
