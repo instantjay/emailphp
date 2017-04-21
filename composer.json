@@ -1,0 +1,18 @@
+{
+    "name": "instantjay/emailphp",
+    "type": "library",
+    "description": "Library for sending e-mails using various 3rd party providers such as Mailgun and Mandrill.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {"instantjay\\emailphp\\": "src/"}
+    },
+    "require": {
+        "mailgun/mailgun-php": "2.*",
+        "mandrill/mandrill": "1.*",
+        "respect/validation": "1.*",
+        "php-http/guzzle6-adapter": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
+    }
+}

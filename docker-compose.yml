@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    php5:
+        build: ./docker/php5
+        volumes:
+            - .:/var/www/emailphp:ro
+            - ./tmp:/var/testoutput
+
+    php7:
+        build: ./docker/php7
+        volumes:
+            - .:/var/www/emailphp:ro
+            - ./tmp:/var/testoutput
